@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
-        private const val REQUEST_CODE_STT = 1
+        private const val REQUEST_CODE = 1
     }
 
     private val textToSpeech: TextToSpeech by lazy {
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Start speaking...")
 
             try {
-                startActivityForResult(speechRecognizerIntent, REQUEST_CODE_STT)
+                startActivityForResult(speechRecognizerIntent, REQUEST_CODE)
             } catch (e: ActivityNotFoundException) {
                 e.printStackTrace()
                 Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode== REQUEST_CODE_STT && resultCode==Activity.RESULT_OK && data!=null){
+        if(requestCode== REQUEST_CODE && resultCode==Activity.RESULT_OK && data!=null){
             val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
             result?.let {
                 answer=it[0]
