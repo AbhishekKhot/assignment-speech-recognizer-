@@ -15,8 +15,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
     private var answer:String?=null
     private val question= "What is 2 multiplied by 2"
-    private val requiredAnswer = "Four"
-    private var userAnswer=false
+    private val requiredAnswer = 4
 
 
     companion object {
@@ -36,14 +35,6 @@ class MainActivity : AppCompatActivity() {
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if(userAnswer){
-            if(answer==requiredAnswer){
-                textToSpeech.speak("Right answer", TextToSpeech.QUEUE_FLUSH, null, null)
-            }
-            else{
-                textToSpeech.speak("Wrong answer", TextToSpeech.QUEUE_FLUSH, null, null)
-            }
-        }
 
         binding.btnSpeak.setOnClickListener {
             val speechRecognizerIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
@@ -71,8 +62,15 @@ class MainActivity : AppCompatActivity() {
             val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
             result?.let {
                 answer=it[0]
-                userAnswer=true
             }
+
+            if(answer==requiredAnswer.toString()){
+                textToSpeech.speak("Right answer", TextToSpeech.QUEUE_FLUSH, null, null)
+            }
+            else{
+                textToSpeech.speak("Wrong answer", TextToSpeech.QUEUE_FLUSH, null, null)
+            }
+
         }
     }
 

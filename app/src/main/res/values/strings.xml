@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SpeechRecognizer App Assignment</string>
+    <string name="answer">ANSWER</string>
+    <string name="what_is_2x2">What is 2x2</string>
 </resources>
